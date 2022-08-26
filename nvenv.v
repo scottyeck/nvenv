@@ -3,7 +3,6 @@ import utils
 import v.vmod
 import cli { Command, Flag }
 
-
 fn main() {
 	vm := vmod.decode(@VMOD_FILE) or { panic(err.msg) }
 
@@ -273,7 +272,7 @@ fn update_nightly(cmd Command) ? {
 	tar_path := '$utils.nvenv_cache/$filename'
 	utils.log_msg('Updating version $version ...')
 	// Extract the tarball, move all its content to the existing version directory and then delete the new version dir
-	if os.system('cd $utils.nvenv_cache && tar -xf $tar_path && cp -arf $tar_name/* $target_version && rm -r $tar_name') != 0 {
+	if os.system('cd $utils.nvenv_cache && tar -xf $tar_path && cp -af $tar_name $target_version && rm -r $tar_name') != 0 {
 		utils.error_msg('Failed to update Nvim.', 3)
 	}
 
